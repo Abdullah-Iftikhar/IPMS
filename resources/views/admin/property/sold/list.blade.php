@@ -215,6 +215,7 @@
                                                 <th>Sold Rate</th>
                                                 <th>Profit</th>
                                                 <th>Commission</th>
+                                                <th>Date</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -234,6 +235,7 @@
                                                         <td>{{$property->getSoldDetail->amount}}</td>
                                                         <td>{{$property->getSoldDetail->amount - $property->rate}}</td>
                                                         <td>{{$property->getSoldDetail->commission}}</td>
+                                                        <td>{{$property->created_at->format('d-m-Y')}}</td>
                                                         <td>
                                                         <span class="dropdown option_list">
                                                             <button id="btnSearchDrop" type="button"

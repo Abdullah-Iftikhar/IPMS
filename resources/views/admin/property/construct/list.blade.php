@@ -213,7 +213,7 @@
                                                 <th>Phase</th>
                                                 <th>Marla</th>
                                                 <th>Expense</th>
-                                                <th>Created</th>
+                                                <th>Date</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -233,7 +233,7 @@
                                                     <td>{{$property->phase}}</td>
                                                     <td>{{$property->marla}}</td>
                                                     <td>{{isset($property->getConstructionDetail)?isset($property->getConstructionDetail->getExpensive)?number_format($property->getConstructionDetail->getExpensive->sum('price')):0:0}}</td>
-                                                    <td>{{$property->created_at->diffForHumans()}}</td>
+                                                    <td>{{$property->created_at->format('d-m-Y')}}</td>
                                                     <td class="@if(isset($property->getConstructionDetail) && $property->getConstructionDetail->status === 'completed') text-success @endif">{{isset($property->getConstructionDetail)?$property->getConstructionDetail->status:"-"}}</td>
                                                     <td>
                                                         <span class="dropdown option_list">

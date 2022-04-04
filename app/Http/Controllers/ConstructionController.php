@@ -134,7 +134,7 @@ class ConstructionController extends Controller
         $request->validate([
             'material' => 'required',
             'description' => 'required',
-            'account' => 'required'
+            'amount' => 'required'
         ]);
         $property = Property::find($request['property_id']);
         if($property) {
@@ -143,7 +143,7 @@ class ConstructionController extends Controller
                 $material = new ConstructionMaterial();
                 $material->construct_property_id = $construction->id;
                 $material->material_id = $request['material'];
-                $material->price = $request['account'];
+                $material->price = $request['amount'];
                 $material->desc = $request['description'];
                 $material->save();
                 return redirect()->route('admin.property.construction')->with('success', 'Material added in this property.');

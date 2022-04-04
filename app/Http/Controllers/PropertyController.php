@@ -16,6 +16,17 @@ class PropertyController extends Controller
 {
     public function propertyList()
     {
+        $returnArr['totalProperties'] = Property::count();
+        $returnArr['activeProperties'] = Property::where('status', 'active')->count();
+        $returnArr['soldProperties'] = Property::where('status', 'sold')->count();
+        $returnArr['rentProperties'] = Property::where('status', 'rent')->count();
+        $returnArr['constructProperties'] = Property::where('status', 'construct')->count();
+        $returnArr['totalPropertiesPrice'] = Property::sum('rate');
+        $returnArr['activePropertiesPrice'] = Property::where('status', 'active')->sum('rate');
+        $returnArr['soldPropertiesPrice'] = Property::where('status', 'sold')->sum('rate');
+        $returnArr['rentPropertiesPrice'] = Property::where('status', 'rent')->sum('rate');
+        $returnArr['constructPropertiesPrice'] = Property::where('status', 'construct')->sum('rate');
+
         $returnArr['properties'] = Property::where(function ($query) {
             if (isset($_GET['society']) && $_GET['society'] != '') {
                 $query->where('society', trim($_GET['society']));
@@ -79,7 +90,6 @@ class PropertyController extends Controller
             ->where('status', 'active')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
-        $returnArr['propertiesCounter'] = Property::where('status', 'active')->count();
         return view('admin.property.list', $returnArr);
     }
 
@@ -93,11 +103,8 @@ class PropertyController extends Controller
         $request->validate([
             'society_name' => 'required',
             'plot_number' => 'required',
-            'block' => 'required',
-            'phase' => 'required',
             'plot_type' => 'required',
             'property_type' => 'required',
-            'marla' => 'required',
             'purchase_rate' => 'required',
             'property_for' => 'required',
         ]);

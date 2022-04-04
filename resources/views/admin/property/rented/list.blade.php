@@ -233,7 +233,7 @@
                                                         <td>{{$property->getRentDetail->advance_amount}}</td>
                                                         <td>{{$property->getRentDetail->monthly_rent}}</td>
                                                         <td>{{$property->getRentDetail->commission}}</td>
-                                                        <td>{{$property->getRentDetail->created_at->diffForHumans()}}</td>
+                                                        <td>{{$property->created_at->format('d-m-Y')}}</td>
                                                         <td>
                                                         <span class="dropdown option_list">
                                                             <button id="btnSearchDrop" type="button"

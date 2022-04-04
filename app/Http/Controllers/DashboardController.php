@@ -27,6 +27,11 @@ class DashboardController extends Controller
         $returnArr['soldProperties'] = Property::where('status', 'sold')->count();
         $returnArr['rentProperties'] = Property::where('status', 'rent')->count();
         $returnArr['constructProperties'] = Property::where('status', 'construct')->count();
+        $returnArr['totalPropertiesPrice'] = Property::sum('rate');
+        $returnArr['activePropertiesPrice'] = Property::where('status', 'active')->sum('rate');
+        $returnArr['soldPropertiesPrice'] = Property::where('status', 'sold')->sum('rate');
+        $returnArr['rentPropertiesPrice'] = Property::where('status', 'rent')->sum('rate');
+        $returnArr['constructPropertiesPrice'] = Property::where('status', 'construct')->sum('rate');
         return view('panel_partial.dashboard', $returnArr);
     }
 

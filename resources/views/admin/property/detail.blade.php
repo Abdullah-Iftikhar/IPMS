@@ -35,38 +35,42 @@
                                 <h2 class="text-info">Property Detail</h2>
                             </div>
                             <div class="col-md-12 col-lg-12 col-sm-12">
-                                <strong>Society Name:</strong> &nbsp; {{$property->society}}
+                                <strong>Society Name:</strong> &nbsp; {{isset($property->society)?$property->society:"-"}}
                             </div>
                             <div class="col-md-4 col-lg-4 col-sm-12">
-                                <strong>Phase:</strong> &nbsp; {{$property->phase}}
-                            </div>
-
-                            <div class="col-md-4 col-lg-4 col-sm-12">
-                                <strong>H/Plot #:</strong> &nbsp; {{$property->plot_no}}
+                                <strong>Phase:</strong> &nbsp; {{isset($property->phase)?$property->phase:"-"}}
                             </div>
 
                             <div class="col-md-4 col-lg-4 col-sm-12">
-                                <strong>Block:</strong> &nbsp; {{$property->block}}
+                                <strong>H/Plot #:</strong> &nbsp; {{isset($property->plot_no)?$property->plot_no:"-"}}
                             </div>
 
                             <div class="col-md-4 col-lg-4 col-sm-12">
-                                <strong>Marla:</strong> &nbsp; {{$property->marla}}
+                                <strong>Block:</strong> &nbsp; {{isset($property->block)?$property->block:"-"}}
                             </div>
 
                             <div class="col-md-4 col-lg-4 col-sm-12">
-                                <strong>Plot Type:</strong> &nbsp; {{$property->plot_type}}
+                                <strong>Area:</strong> &nbsp; {{isset($property->area)?$property->area:"-"}}
                             </div>
 
                             <div class="col-md-4 col-lg-4 col-sm-12">
-                                <strong>Property Type:</strong> &nbsp; {{$property->property_type}}
+                                <strong>Area Size:</strong> &nbsp; {{isset($property->area_size)?$property->area_size:"-"}}
                             </div>
 
                             <div class="col-md-4 col-lg-4 col-sm-12">
-                                <strong>Rate:</strong> &nbsp; {{number_format($property->rate)}} (PKR)
+                                <strong>Plot Type:</strong> &nbsp; {{isset($property->plot_type)?$property->plot_type:"-"}}
                             </div>
 
                             <div class="col-md-4 col-lg-4 col-sm-12">
-                                <strong>Property For:</strong> &nbsp; {{$property->property_for}}
+                                <strong>Property Type:</strong> &nbsp; {{isset($property->property_type)?$property->property_type:"-"}}
+                            </div>
+
+                            <div class="col-md-4 col-lg-4 col-sm-12">
+                                <strong>Rate:</strong> &nbsp; {{isset($property->rate)?number_format($property->rate):0}} (PKR)
+                            </div>
+
+                            <div class="col-md-4 col-lg-4 col-sm-12">
+                                <strong>Property For:</strong> &nbsp; {{isset($property->property_for)?$property->property_for:"_"}}
                             </div>
                         </div>
 
@@ -76,15 +80,15 @@
                                 <h2 class="text-info">External Owner Detail</h2>
                             </div>
                             <div class="col-md-4 col-lg-4 col-sm-12">
-                                <strong>Owner Name</strong> &nbsp; {{$property->owner_name}}
+                                <strong>Owner Name</strong> &nbsp; {{isset($property->owner_name)?$property->owner_name:"-"}}
                             </div>
 
                             <div class="col-md-4 col-lg-4 col-sm-12">
-                                <strong>Owner Mobile Number:</strong> &nbsp; {{$property->owner_number}}
+                                <strong>Owner Mobile Number:</strong> &nbsp; {{isset($property->owner_number)?$property->owner_number:"-"}}
                             </div>
 
                             <div class="col-md-4 col-lg-4 col-sm-12">
-                                <strong>Owner CNIC:</strong> &nbsp; {{$property->id_card}}
+                                <strong>Owner CNIC:</strong> &nbsp; {{isset($property->id_card)?$property->id_card:"-"}}
                             </div>
                         </div>
                         @endif

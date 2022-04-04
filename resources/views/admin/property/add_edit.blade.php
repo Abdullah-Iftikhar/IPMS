@@ -58,7 +58,8 @@
                                                         <div class="row">
                                                             <div class="col-lg-4 col-md-4 col-sm-12">
                                                                 <fieldset class="form-group">
-                                                                    <label>Plot/H #</label>
+                                                                    <label>Plot/H # (<strong
+                                                                            class="text-info">Optional</strong>)</label>
                                                                     <input type="text" name="plot_number" required
                                                                            value="{{isset($property)?$property->plot_no:old('plot_number')}}"
                                                                            class="form-control"
@@ -72,7 +73,8 @@
 
                                                             <div class="col-lg-4 col-md-4 col-sm-12">
                                                                 <fieldset class="form-group">
-                                                                    <label>Block</label>
+                                                                    <label>Block (<strong
+                                                                            class="text-info">Optional</strong>)</label>
                                                                     <input type="text" name="block" required
                                                                            value="{{isset($property)?$property->block:old('block')}}"
                                                                            class="form-control"
@@ -86,7 +88,8 @@
 
                                                             <div class="col-lg-4 col-md-4 col-sm-12">
                                                                 <fieldset class="form-group">
-                                                                    <label>Phase</label>
+                                                                    <label>Phase (<strong
+                                                                            class="text-info">Optional</strong>)</label>
                                                                     <input type="text" name="phase" required
                                                                            value="{{isset($property)?$property->phase:old('phase')}}"
                                                                            class="form-control"
@@ -102,7 +105,6 @@
                                                         <div class="row">
                                                             <div class="col-lg-6 col-md-6 col-sm-6">
                                                                 <label>Plot Type</label>
-
                                                                 <fieldset class="form-group">
                                                                     <div style="display: flex">
                                                                         <div class="form-check mr-4">
@@ -142,6 +144,7 @@
                                                                     <select name="property_type" required
                                                                             class="form-control">
                                                                         <option selected disabled>Choose One</option>
+                                                                        <option value="file" @if(isset($property) && $property->property_type == "file") selected @endif>File</option>
                                                                         <option value="plot" @if(isset($property) && $property->property_type == "plot") selected @endif>Plot</option>
                                                                         <option value="home" @if(isset($property) && $property->property_type == "home") selected @endif>Home</option>
                                                                         <option value="plaza" @if(isset($property) && $property->property_type == "plaza") selected @endif>Plaza</option>
@@ -161,17 +164,32 @@
 
                                                             <div class="col-lg-4 col-md-4 col-sm-12">
                                                                 <fieldset class="form-group">
-                                                                    <label>Marla &nbsp
-                                                                        <strong>(<span class="text-info">1,2,3,4,5 ...... 20, 40</span>)</strong>
-                                                                    </label>
-                                                                    <input type="number" step="any" name="marla"
+                                                                    <label>Area</label>
+                                                                    <select name="area" required
+                                                                            class="form-control">
+                                                                        <option selected disabled>Choose One</option>
+                                                                        <option value="marla" @if(isset($property) && $property->area == "marla") selected @endif>Marla</option>
+                                                                        <option value="canal" @if(isset($property) && $property->area == "canal") selected @endif>Canal</option>
+                                                                        <option value="acre" @if(isset($property) && $property->area == "acre") selected @endif>Acre</option>
+                                                                    </select>
+                                                                    @if($errors->has('area'))
+                                                                        <div class="error"
+                                                                             style="color:red">{{$errors->first('area')}}</div>
+                                                                    @endif
+                                                                </fieldset>
+                                                            </div>
+
+                                                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                                                <fieldset class="form-group">
+                                                                    <label>Area Size</label>
+                                                                    <input type="number" step="any" name="area_size"
                                                                            required
-                                                                           value="{{isset($property)?$property->marla:old('marla')}}"
+                                                                           value="{{isset($property)?$property->area_size:old('area_size')}}"
                                                                            class="form-control"
                                                                            id="basicInput">
-                                                                    @if($errors->has('marla'))
+                                                                    @if($errors->has('area_size'))
                                                                         <div class="error"
-                                                                             style="color:red">{{$errors->first('marla')}}</div>
+                                                                             style="color:red">{{$errors->first('area_size')}}</div>
                                                                     @endif
                                                                 </fieldset>
                                                             </div>
@@ -190,12 +208,9 @@
                                                                     @endif
                                                                 </fieldset>
                                                             </div>
-                                                        </div>
 
-                                                        <div class="row">
                                                             <div class="col-lg-6 col-md-6 col-sm-6">
                                                                 <label>Property For</label>
-
                                                                 <fieldset class="form-group">
                                                                     <div style="display: flex">
                                                                         <div class="form-check mr-4">

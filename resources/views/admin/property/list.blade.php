@@ -31,11 +31,177 @@
                     <div class="card-body card-dashboard">
                         <form action="" method="get">
                             <div class="row">
-                                <div class="col-12 mb-1">
-                                    <p class="float-left">
-                                        <strong class="font-size-large">Total Active Properties: <span class="text-info">{{$propertiesCounter}}</span></strong>
-                                    </p>
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="card pull-up border-top-success border-top-3 rounded-0">
+                                        <div class="card-header">
+                                            <span class="font-size-large">Total Properties</span>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div class="card-body p-1">
+                                                <h4 class="font-large-1 text-bold-400">
+                                                    {{isset($totalProperties)?$totalProperties:0}}
+                                                </h4>
+                                            </div>
+                                            <div class="card-footer p-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="card pull-up border-top-success border-top-3 rounded-0">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Total Properties Amount</h4>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div class="card-body p-1">
+                                               <span class="font-size-large">{{isset($totalPropertiesPrice)?number_format($totalPropertiesPrice):0}} (PKR)</span>
+                                            </div>
+                                            <div class="card-footer p-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="card pull-up border-top-info border-top-3 rounded-0">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Active Properties</h4>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div class="card-body p-1">
+                                                <h4 class="font-large-1 text-bold-400">
+                                                    {{isset($activeProperties)?$activeProperties:0}}
+                                                </h4>
+                                            </div>
+                                            <div class="card-footer p-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="card pull-up border-top-info border-top-3 rounded-0">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Active Properties Amount</h4>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div class="card-body p-1">
+                                                <span class="font-size-large">
+                                                    {{isset($activePropertiesPrice)?number_format($activePropertiesPrice):0}} (PKR)
+                                                </span>
+                                            </div>
+                                            <div class="card-footer p-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="card pull-up border-top-pink border-top-3 rounded-0">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Sold Properties Properties</h4>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div class="card-body p-1">
+                                                <h4 class="font-large-1 text-bold-400">
+                                                    {{isset($soldProperties)?$soldProperties:0}}
+                                                </h4>
+                                            </div>
+                                            <div class="card-footer p-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="card pull-up border-top-pink border-top-3 rounded-0">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Sold Properties Amount</h4>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div class="card-body p-1">
+                                                <span class="font-size-large">
+                                                    {{isset($soldPropertiesPrice)?number_format($soldPropertiesPrice):0}} (PKR)
+                                                </span>
+                                            </div>
+                                            <div class="card-footer p-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="card pull-up border-top-purple border-top-3 rounded-0">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Rented Properties</h4>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div class="card-body p-1">
+                                                <h4 class="font-large-1 text-bold-400">
+                                                    {{isset($rentProperties)?$rentProperties:0}}
+                                                </h4>
+                                            </div>
+                                            <div class="card-footer p-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="card pull-up border-top-purple border-top-3 rounded-0">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Rented Properties Amount</h4>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div class="card-body p-1">
+                                                <span class="font-size-large">
+                                                    {{isset($rentPropertiesPrice)?number_format($rentPropertiesPrice):0}} (PKR)
+                                                </span>
+                                            </div>
+                                            <div class="card-footer p-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="card pull-up border-top-red border-top-3 rounded-0">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Construct Properties</h4>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div class="card-body p-1">
+                                                <h4 class="font-large-1 text-bold-400">
+                                                    {{isset($constructProperties)?$constructProperties:0}}
+                                                </h4>
+                                            </div>
+                                            <div class="card-footer p-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="card pull-up border-top-red border-top-3 rounded-0">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Construct Properties Amount</h4>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div class="card-body p-1">
+                                                <span class="font-size-large">
+                                                    {{isset($constructPropertiesPrice)?number_format($constructPropertiesPrice):0}} (PKR)
+                                                </span>
+                                            </div>
+                                            <div class="card-footer p-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 mb-1">
                                     <p class="float-right">
                                         <a href="{{route('admin.property.add')}}"
                                            class="btn btn-success float-right create_user">
@@ -218,8 +384,10 @@
                                                 <th>Plot #</th>
                                                 <th>Block</th>
                                                 <th>Phase</th>
-                                                <th>Marla</th>
+                                                <th>Area</th>
+                                                <th>Area Size</th>
                                                 <th>Rate</th>
+                                                <th>Date</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -227,7 +395,7 @@
                                             @foreach($properties as $key=>$property)
                                                 <tr>
                                                     <td>{{$key+1}}</td>
-                                                    <td>{{$property->society}}</td>
+                                                    <td>{{isset($property->society)?$property->society:"-"}}</td>
                                                     <td>
                                                         <a href="{{route('admin.property.detail', $property->id)}}">
                                                             {{$property->plot_no}}
@@ -235,8 +403,10 @@
                                                     </td>
                                                     <td>{{$property->block}}</td>
                                                     <td>{{$property->phase}}</td>
-                                                    <td>{{$property->marla}}</td>
+                                                    <td>{{$property->area}}</td>
+                                                    <td>{{$property->area_size}}</td>
                                                     <td>{{number_format($property->rate)}}</td>
+                                                    <td>{{$property->created_at->format('d-m-Y')}}</td>
                                                     <td>
                                                         <span class="dropdown option_list">
                                                             <button id="btnSearchDrop" type="button"
@@ -257,7 +427,8 @@
                                                                     Edit
                                                                 </a>
 
-                                                                <form action="{{route('admin.property.delete', $property->id)}}"
+                                                                <form
+                                                                    action="{{route('admin.property.delete', $property->id)}}"
                                                                     method="post">
                                                                     @method('DELETE')
                                                                     @csrf
