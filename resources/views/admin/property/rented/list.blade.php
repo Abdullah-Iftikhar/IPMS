@@ -128,8 +128,19 @@
 
                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                     <fieldset class="form-group">
-                                        <input type="number" name="marla" placeholder="Marla"
-                                               value="{{isset($_GET['marla'])?$_GET['marla']:old('marla')}}"
+                                        <select name="area" required class="form-control">
+                                            <option selected disabled>Area</option>
+                                            <option value="marla" @if(isset($_GET['property_for']) && $_GET['property_for'] == "marla") selected @endif>Marla</option>
+                                            <option value="canal" @if(isset($_GET['property_for']) && $_GET['property_for'] == "canal") selected @endif>Canal</option>
+                                            <option value="acre" @if(isset($_GET['property_for']) && $_GET['property_for'] == "acre") selected @endif>Acre</option>
+                                        </select>
+                                    </fieldset>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <fieldset class="form-group">
+                                        <input type="number" name="area_size" placeholder="Area Size"
+                                               value="{{isset($_GET['area_size'])?$_GET['area_size']:old('area_size')}}"
                                                class="form-control"
                                                id="basicInput">
                                     </fieldset>
@@ -210,10 +221,10 @@
                                                 <th>#</th>
                                                 <th>Society</th>
                                                 <th>House #</th>
-                                                <th>Marla</th>
+                                                <th>Area</th>
+                                                <th>Area Size</th>
                                                 <th>Advance</th>
                                                 <th>Monthly Rent</th>
-                                                <th>Commission</th>
                                                 <th>Date</th>
                                                 <th>Action</th>
                                             </tr>
@@ -229,10 +240,10 @@
                                                                 {{$property->plot_no ."-". $property->block}}
                                                             </a>
                                                         </td>
-                                                        <td>{{$property->marla}}</td>
+                                                        <td>{{$property->area}}</td>
+                                                        <td>{{$property->area_size}}</td>
                                                         <td>{{$property->getRentDetail->advance_amount}}</td>
                                                         <td>{{$property->getRentDetail->monthly_rent}}</td>
-                                                        <td>{{$property->getRentDetail->commission}}</td>
                                                         <td>{{$property->created_at->format('d-m-Y')}}</td>
                                                         <td>
                                                         <span class="dropdown option_list">

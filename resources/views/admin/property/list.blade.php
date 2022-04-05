@@ -300,8 +300,19 @@
 
                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                     <fieldset class="form-group">
-                                        <input type="number" name="marla" placeholder="Marla"
-                                               value="{{isset($_GET['marla'])?$_GET['marla']:old('marla')}}"
+                                        <select name="area" required class="form-control">
+                                            <option selected disabled>Area</option>
+                                            <option value="marla" @if(isset($_GET['property_for']) && $_GET['property_for'] == "marla") selected @endif>Marla</option>
+                                            <option value="canal" @if(isset($_GET['property_for']) && $_GET['property_for'] == "canal") selected @endif>Canal</option>
+                                            <option value="acre" @if(isset($_GET['property_for']) && $_GET['property_for'] == "acre") selected @endif>Acre</option>
+                                        </select>
+                                    </fieldset>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <fieldset class="form-group">
+                                        <input type="number" name="area_size" placeholder="Area Size"
+                                               value="{{isset($_GET['area_size'])?$_GET['area_size']:old('area_size')}}"
                                                class="form-control"
                                                id="basicInput">
                                     </fieldset>
@@ -496,9 +507,13 @@
                                            $arra['property_type'] = trim($_GET['property_type']);
                                        }
 
-                                       if (isset($_GET['marla'])) {
-                                           $arra['marla'] = trim($_GET['marla']);
+                                       if (isset($_GET['area'])) {
+                                           $arra['area'] = trim($_GET['area']);
                                        }
+                                        if (isset($_GET['area_size'])) {
+                                           $arra['area_size'] = trim($_GET['area_size']);
+                                       }
+
                                        if (isset($_GET['rate'])) {
                                            $arra['rate'] = trim($_GET['rate']);
                                        }

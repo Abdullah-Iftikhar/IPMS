@@ -42,8 +42,13 @@ class RentController extends Controller
                 }
             })
             ->orWhere(function ($query) {
-                if (isset($_GET['marla']) && $_GET['marla'] != '') {
-                    $query->where('marla', trim($_GET['marla']));
+                if (isset($_GET['area']) && $_GET['area'] != '') {
+                    $query->where('area', trim($_GET['area']));
+                }
+            })
+            ->orWhere(function ($query) {
+                if (isset($_GET['area_size']) && $_GET['area_size'] != '') {
+                    $query->where('area_size', trim($_GET['area_size']));
                 }
             })
             ->orWhere(function ($query) {

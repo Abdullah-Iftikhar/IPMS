@@ -25,7 +25,6 @@ class CreateConstructPropertiesTable extends Migration
                 ->onDelete('cascade');
             $table->string('status')->default("under-construction")->comment("under-construction, completed");
             $table->timestamps();
-
             $table->index('property_id');
             $table->index('user_id');
             $table->index('status');

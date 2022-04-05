@@ -47,9 +47,9 @@
                                                         </div>
 
                                                         <div class="row">
-                                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="col-lg-4 col-md-4 col-sm-12">
                                                                 <fieldset class="form-group">
-                                                                    <label>Name (Rented To)</label>
+                                                                    <label>Name (Sold To)</label>
                                                                     <input type="text" name="name" required
                                                                            class="form-control" value="{{old('name')}}"
                                                                            id="basicInput">
@@ -60,11 +60,26 @@
                                                                 </fieldset>
                                                             </div>
 
-                                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                                                <fieldset class="form-group">
+                                                                    <label>Phone Number</label>
+                                                                    <input type="number" name="phone_number" required
+                                                                           class="form-control"
+                                                                           value="{{old('phone_number')}}"
+                                                                           id="basicInput">
+                                                                    @if($errors->has('phone_number'))
+                                                                        <div class="error"
+                                                                             style="color:red">{{$errors->first('phone_number')}}</div>
+                                                                    @endif
+                                                                </fieldset>
+                                                            </div>
+
+                                                            <div class="col-lg-4 col-md-4 col-sm-12">
                                                                 <fieldset class="form-group">
                                                                     <label>Id Card</label>
                                                                     <input type="number" name="id_card" required
-                                                                           class="form-control" value="{{old('id_card')}}"
+                                                                           class="form-control"
+                                                                           value="{{old('id_card')}}"
                                                                            id="basicInput">
                                                                     @if($errors->has('id_card'))
                                                                         <div class="error"
@@ -78,10 +93,14 @@
                                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                                 <fieldset class="form-group">
                                                                     <label>Bank Account</label>
-                                                                    <select name="bank_account" id="" class="form-control">
+                                                                    <select name="bank_account" id=""
+                                                                            class="form-control">
                                                                         <option selected value="">Cash</option>
                                                                         @foreach($accounts as $account)
-                                                                            <option value="{{$account->id}}">{{$account->acc_title}} ({{$account->acc_number}})</option>
+                                                                            <option
+                                                                                value="{{$account->id}}">{{$account->acc_title}}
+                                                                                ({{$account->acc_number}})
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                     @if($errors->has('bank_account'))
@@ -95,7 +114,8 @@
                                                                 <fieldset class="form-group">
                                                                     <label>Advance Amount</label>
                                                                     <input type="number" name="advance_amount" required
-                                                                           class="form-control" value="{{old('advance_amount')}}"
+                                                                           class="form-control"
+                                                                           value="{{old('advance_amount')}}"
                                                                            id="basicInput">
                                                                     @if($errors->has('advance_amount'))
                                                                         <div class="error"
@@ -108,7 +128,8 @@
                                                                 <fieldset class="form-group">
                                                                     <label>Monthly Rent</label>
                                                                     <input type="number" name="monthly_rent" required
-                                                                           class="form-control" value="{{old('monthly_rent')}}"
+                                                                           class="form-control"
+                                                                           value="{{old('monthly_rent')}}"
                                                                            id="basicInput">
                                                                     @if($errors->has('monthly_rent'))
                                                                         <div class="error"
@@ -119,8 +140,10 @@
 
                                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                                 <fieldset class="form-group">
-                                                                    <label>Commission</label>
-                                                                    <input type="number" step="any" value="{{old('commission')}}" name="commission" required
+                                                                    <label>Commission Commission</label>
+                                                                    <input type="number" step="any"
+                                                                           value="{{old('commission')}}"
+                                                                           name="commission"
                                                                            class="form-control"
                                                                            id="basicInput">
                                                                     @if($errors->has('commission'))
@@ -132,7 +155,9 @@
 
                                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                                 <fieldset class="form-group">
-                                                                    <label>Pictures - Id card, Agreement etc. &nbsp;<span class="text-info">(<strong>Optional</strong>)</span></label>
+                                                                    <label>Pictures - Id card, Agreement etc.
+                                                                        &nbsp;<span
+                                                                            class="text-info">(<strong>Optional</strong>)</span></label>
                                                                     <input type="file" name="images[]"
                                                                            class="form-control" multiple
                                                                            id="basicInput">
@@ -142,13 +167,30 @@
                                                                     @endif
                                                                 </fieldset>
                                                             </div>
+
+                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                <fieldset class="form-group">
+                                                                    <label>Remarks
+                                                                        &nbsp;<span
+                                                                            class="text-info">(<strong>Optional</strong>)</span>
+                                                                    </label>
+                                                                    <textarea class="form-control" name="remarks" id=""
+                                                                              cols="30"
+                                                                              rows="10"></textarea>
+                                                                    @if($errors->has('remarks'))
+                                                                        <div class="error"
+                                                                             style="color:red">{{$errors->first('remarks')}}</div>
+                                                                    @endif
+                                                                </fieldset>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="row justify-content-center border-top-black">
                                                         <fieldset class="form-group center mt-2">
                                                             <a href="{{route('admin.property.sold')}}"
                                                                class="btn btn-primary">View All</a>
-                                                            <button type="submit" class="btn btn-success">submit</button>
+                                                            <button type="submit" class="btn btn-success">submit
+                                                            </button>
                                                         </fieldset>
                                                     </div>
                                                 </form>

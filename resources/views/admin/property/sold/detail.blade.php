@@ -27,13 +27,15 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-body card-dashboard">
-                        <div class="row">
+                        <div class="row mb-3">
                             @if(isset($property->getSoldDetail))
                                 <div class="col-md-6 text-left">
-                                    <strong>Profit Amount:</strong>&nbsp; <span class="text-info">{{number_format($property->getSoldDetail->amount - $property->rate)}}</span>
+                                    <strong>Profit Amount:</strong>&nbsp; <span
+                                        class="text-info">{{number_format($property->getSoldDetail->amount - $property->rate)}}</span>
                                 </div>
                             @endif
                             <div class="col-md-6 text-right">
+                                <a href="{{route('admin.sold.property.iteration',$property->getSoldDetail->id)}}" class="btn btn-info">Add Iteration</a>
                                 <a href="{{route('admin.property.sold')}}" class="btn btn-dark">Back</a>
                             </div>
                             <div class="col-md-12 col-lg-12 col-sm-12 text-center mt-2">
@@ -55,7 +57,11 @@
                             </div>
 
                             <div class="col-md-4 col-lg-4 col-sm-12">
-                                <strong>Marla:</strong> &nbsp; {{$property->marla}}
+                                <strong>Area:</strong> &nbsp; {{$property->area}}
+                            </div>
+
+                            <div class="col-md-4 col-lg-4 col-sm-12">
+                                <strong>Area Size:</strong> &nbsp; {{$property->area_size}}
                             </div>
 
                             <div class="col-md-4 col-lg-4 col-sm-12">
@@ -76,7 +82,7 @@
                         </div>
 
                         @if(isset($property->owner_name) && isset($property->owner_number) && isset($property->id_card))
-                            <div class="row">
+                            <div class="row mb-3">
                                 <div class="col-md-12 col-lg-12 col-sm-12 text-center mt-2">
                                     <h2 class="text-info">External Owner Detail</h2>
                                 </div>
@@ -96,13 +102,14 @@
                         @endif
 
                         @if(isset($property->getSoldDetail))
-                            <div class="row">
+                            <div class="row mb-3">
                                 <div class="col-md-12 col-lg-12 col-sm-12 text-center mt-2">
                                     <h2 class="text-info">Purchaser Detail</h2>
                                 </div>
 
                                 <div class="col-md-4 col-lg-4 col-sm-12">
-                                    <strong>Sold By:</strong> &nbsp; {{isset($property->getSoldDetail->getUser)?$property->getSoldDetail->getUser->name:"User Deleted"}}
+                                    <strong>Sold By:</strong>
+                                    &nbsp; {{isset($property->getSoldDetail->getUser)?$property->getSoldDetail->getUser->name:"User Deleted"}}
                                 </div>
 
                                 <div class="col-md-4 col-lg-4 col-sm-12">
@@ -118,23 +125,85 @@
                                 </div>
 
                                 <div class="col-md-4 col-lg-4 col-sm-12">
-                                    <strong>Commission:</strong> &nbsp; {{$property->getSoldDetail->commission}}
+                                    <strong>Commission:</strong>
+                                    &nbsp; {{isset($property->getSoldDetail->commission)?$property->getSoldDetail->commission:0}}
                                 </div>
                             </div>
                         @endif
 
                         @if(isset($property->getSoldDetail->getImages) && count($property->getSoldDetail->getImages) > 0)
-                            <div class="row">
+                            <div class="row mb-3">
                                 <div class="col-md-12 col-lg-12 col-sm-12 text-center mt-2">
                                     <h2 class="text-info">Images</h2>
                                 </div>
                                 @foreach($property->getSoldDetail->getImages as $image)
                                     <div class="col-md-6 col-lg-6 col-sm-12">
-                                        <img class="w-100" src="{{asset('public/sold_property/'.$image->image)}}" alt="">
+                                        <img class="w-100" src="{{asset('public/sold_property/'.$image->image)}}"
+                                             alt="">
                                     </div>
                                 @endforeach
                             </div>
                         @endif
+
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 col-sm-12">
+                                <!-- File export table -->
+                                <section id="file-export">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12 col-sm-12">
+                                            <div class="table-responsive">
+                                                <table id="custom-table"
+                                                       class="table table-striped table-bordered file-export">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Type</th>
+                                                        <th>Start Date</th>
+                                                        <th>Next Date</th>
+                                                        <th>Amount</th>
+                                                        <th>Description</th>
+                                                        <th>Created Date</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {{--                                                        @foreach($searchMaterials as $expense)--}}
+                                                    {{--                                                            <tr>--}}
+                                                    {{--                                                                <td>H # {{$property->plot_no}}-{{$property->block}}--}}
+                                                    {{--                                                                    <strong>,</strong> Phase-{{$property->phase}}--}}
+                                                    {{--                                                                    <strong>,</strong> {{$property->society}}</td>--}}
+                                                    {{--                                                                <td>{{isset($expense->getMaterial)?$expense->getMaterial->name:"-"}}</td>--}}
+                                                    {{--                                                                <td>{{number_format($expense->price,2)}}</td>--}}
+                                                    {{--                                                                <td>{{$expense->desc}}</td>--}}
+                                                    {{--                                                                <td>{{$expense->created_at->format('d-M-Y')}}</td>--}}
+                                                    {{--                                                            </tr>--}}
+                                                    {{--                                                        @endforeach--}}
+                                                    </tbody>
+                                                    <tfoot>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th>
+                                                            {{--                                                                <div class="d-flex">--}}
+                                                            {{--                                                                    <strong>--}}
+                                                            {{--                                                                        Total Expense:--}}
+                                                            {{--                                                                        <span class="text-info">--}}
+                                                            {{--                                                                            {{isset($searchMaterials)?number_format($searchMaterials->sum('price'), 2):0}}--}}
+                                                            {{--                                                                        </span>--}}
+                                                            {{--                                                                        (PKR)--}}
+                                                            {{--                                                                    </strong>--}}
+                                                            {{--                                                                </div>--}}
+                                                        </th>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <!-- File export table -->
+                            </div>
+                        </div>
 
                     </div>
                 </div>

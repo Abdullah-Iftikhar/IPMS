@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Property;
 use App\Models\SoldProperty;
+use Illuminate\Http\Request;
 
 class SellController extends Controller
 {
@@ -13,7 +14,7 @@ class SellController extends Controller
             if (isset($_GET['society']) && $_GET['society'] != '') {
                 $query->where('society', trim($_GET['society']));
             }
-            })
+        })
             ->orWhere(function ($query) {
                 if (isset($_GET['plot_number']) && $_GET['plot_number'] != '') {
                     $query->where('plot_no', trim($_GET['plot_number']));
@@ -40,8 +41,13 @@ class SellController extends Controller
                 }
             })
             ->orWhere(function ($query) {
-                if (isset($_GET['marla']) && $_GET['marla'] != '') {
-                    $query->where('marla', trim($_GET['marla']));
+                if (isset($_GET['area']) && $_GET['area'] != '') {
+                    $query->where('area', trim($_GET['area']));
+                }
+            })
+            ->orWhere(function ($query) {
+                if (isset($_GET['area_size']) && $_GET['area_size'] != '') {
+                    $query->where('area_size', trim($_GET['area_size']));
                 }
             })
             ->orWhere(function ($query) {

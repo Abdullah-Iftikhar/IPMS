@@ -38,6 +38,11 @@
                 </a>
                 <ul class="menu-content">
                     <li>
+                        <a href="{{route("admin.property.iteration.list")}}">
+                            <span data-i18n="">Iteration Type</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{route("admin.property.list")}}">
                             <span data-i18n="">List</span>
                         </a>

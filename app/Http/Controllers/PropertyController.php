@@ -58,8 +58,13 @@ class PropertyController extends Controller
                 }
             })
             ->orWhere(function ($query) {
-                if (isset($_GET['marla']) && $_GET['marla'] != '') {
-                    $query->where('marla', trim($_GET['marla']));
+                if (isset($_GET['area']) && $_GET['area'] != '') {
+                    $query->where('area', trim($_GET['area']));
+                }
+            })
+            ->orWhere(function ($query) {
+                if (isset($_GET['area_size']) && $_GET['area_size'] != '') {
+                    $query->where('area_size', trim($_GET['area_size']));
                 }
             })
             ->orWhere(function ($query) {
@@ -102,10 +107,11 @@ class PropertyController extends Controller
     {
         $request->validate([
             'society_name' => 'required',
-            'plot_number' => 'required',
             'plot_type' => 'required',
             'property_type' => 'required',
-            'purchase_rate' => 'required',
+            'area' => 'required',
+            'area_size' => 'required',
+            'amount' => 'required',
             'property_for' => 'required',
         ]);
 
@@ -125,8 +131,9 @@ class PropertyController extends Controller
         $property->phase = $request['phase'];
         $property->plot_type = $request['plot_type'];
         $property->property_type = $request['property_type'];
-        $property->marla = $request['marla'];
-        $property->rate = $request['purchase_rate'];
+        $property->area = $request['area'];
+        $property->area_size = $request['area_size'];
+        $property->rate = $request['amount'];
         $property->property_for = $request['property_for'];
         $property->owner_name = $request['owner_name'];
         $property->owner_number = $request['mobile_number'];
@@ -159,13 +166,11 @@ class PropertyController extends Controller
         if ($property) {
             $request->validate([
                 'society_name' => 'required',
-                'plot_number' => 'required',
-                'block' => 'required',
-                'phase' => 'required',
                 'plot_type' => 'required',
                 'property_type' => 'required',
-                'marla' => 'required',
-                'purchase_rate' => 'required',
+                'area' => 'required',
+                'area_size' => 'required',
+                'amount' => 'required',
                 'property_for' => 'required',
             ]);
 
@@ -183,8 +188,9 @@ class PropertyController extends Controller
             $property->phase = $request['phase'];
             $property->plot_type = $request['plot_type'];
             $property->property_type = $request['property_type'];
-            $property->marla = $request['marla'];
-            $property->rate = $request['purchase_rate'];
+            $property->area = $request['area'];
+            $property->area_size = $request['area_size'];
+            $property->rate = $request['amount'];
             $property->property_for = $request['property_for'];
             $property->owner_name = $request['owner_name'];
             $property->owner_number = $request['mobile_number'];
@@ -239,8 +245,8 @@ class PropertyController extends Controller
             $request->validate([
                 'name' => 'required',
                 'id_card' => 'required',
+                'phone_number' => 'required',
                 'amount' => 'required',
-                'commission' => 'required',
             ]);
 
             if ($request['images']) {
@@ -254,6 +260,7 @@ class PropertyController extends Controller
             $soldProperty->property_id = $property->id;
             $soldProperty->name = $request['name'];
             $soldProperty->id_card = $request['id_card'];
+            $soldProperty->phone_number = $request['phone_number'];
             $soldProperty->amount = $request['amount'];
             $soldProperty->commission = $request['commission'];
             $soldProperty->save();
@@ -305,6 +312,7 @@ class PropertyController extends Controller
             $request->validate([
                 'name' => 'required',
                 'id_card' => 'required',
+                'phone_number' => 'required',
                 'advance_amount' => 'required',
                 'monthly_rent' => 'required',
                 'commission' => 'required',
@@ -320,6 +328,7 @@ class PropertyController extends Controller
             $rentedProperty->property_id = $property->id;
             $rentedProperty->name = $request['name'];
             $rentedProperty->id_card = $request['id_card'];
+            $rentedProperty->phone_number = $request['phone_number'];
             $rentedProperty->advance_amount = $request['advance_amount'];
             $rentedProperty->monthly_rent = $request['monthly_rent'];
             $rentedProperty->commission = $request['commission'];
