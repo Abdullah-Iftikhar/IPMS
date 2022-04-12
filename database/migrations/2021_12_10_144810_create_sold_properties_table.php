@@ -25,8 +25,12 @@ class CreateSoldPropertiesTable extends Migration
                 ->onDelete('cascade');
             $table->string('name');
             $table->string('id_card');
+            $table->string('phone_number')->nullable();
             $table->double('amount');
-            $table->double('commission');
+            $table->double('commission')->nullable();
+            $table->text('remarks')->nullable();
+            $table->integer('status')->default(0)->comment("0=in progress, 1=completed");
+
             $table->timestamps();
         });
     }

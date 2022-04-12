@@ -84,7 +84,7 @@
                                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                                 <fieldset class="form-group">
                                                                     <label>Amount</label>
-                                                                    <input type="number" name="amount" required
+                                                                    <input type="number"  title="remaining amount is {{isset($remainingAmount)?$remainingAmount:0}}" onkeyup="if(this.value > {{isset($remainingAmount)?$remainingAmount:""}}) this.value = null;"  name="amount" required
                                                                            class="form-control"
                                                                            value="{{old('amount')}}"
                                                                            id="basicInput">

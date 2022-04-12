@@ -35,7 +35,8 @@
                                 </div>
                             @endif
                             <div class="col-md-6 text-right">
-                                <a href="{{route('admin.sold.property.iteration',$property->getSoldDetail->id)}}" class="btn btn-info">Add Iteration</a>
+                                <a href="{{route('admin.sold.property.iteration',$property->getSoldDetail->id)}}"
+                                   class="btn btn-info">Add Iteration</a>
                                 <a href="{{route('admin.property.sold')}}" class="btn btn-dark">Back</a>
                             </div>
                             <div class="col-md-12 col-lg-12 col-sm-12 text-center mt-2">
@@ -165,32 +166,33 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    {{--                                                        @foreach($searchMaterials as $expense)--}}
-                                                    {{--                                                            <tr>--}}
-                                                    {{--                                                                <td>H # {{$property->plot_no}}-{{$property->block}}--}}
-                                                    {{--                                                                    <strong>,</strong> Phase-{{$property->phase}}--}}
-                                                    {{--                                                                    <strong>,</strong> {{$property->society}}</td>--}}
-                                                    {{--                                                                <td>{{isset($expense->getMaterial)?$expense->getMaterial->name:"-"}}</td>--}}
-                                                    {{--                                                                <td>{{number_format($expense->price,2)}}</td>--}}
-                                                    {{--                                                                <td>{{$expense->desc}}</td>--}}
-                                                    {{--                                                                <td>{{$expense->created_at->format('d-M-Y')}}</td>--}}
-                                                    {{--                                                            </tr>--}}
-                                                    {{--                                                        @endforeach--}}
+                                                    @if(count($property->getSoldDetail->getSoldIteration))
+                                                        @foreach($property->getSoldDetail->getSoldIteration as $iteration)
+                                                            <tr>
+                                                                <td>{{isset($iteration->getEntity)?$iteration->getEntity->name:"-"}}</td>
+                                                                <td>{{isset($iteration->start_date)?$iteration->start_date:"-"}}</td>
+                                                                <td>{{isset($iteration->end_date)?$iteration->end_date:"-"}}</td>
+                                                                <td>{{isset($iteration->amount)?number_format($iteration->amount,2):"-"}}</td>
+                                                                <td>{{isset($iteration->description)?$iteration->description:"-"}}</td>
+                                                                <td>{{$iteration->created_at->format('d-M-Y')}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
                                                     </tbody>
                                                     <tfoot>
                                                     <tr>
                                                         <th></th>
                                                         <th></th>
                                                         <th>
-                                                            {{--                                                                <div class="d-flex">--}}
-                                                            {{--                                                                    <strong>--}}
-                                                            {{--                                                                        Total Expense:--}}
-                                                            {{--                                                                        <span class="text-info">--}}
-                                                            {{--                                                                            {{isset($searchMaterials)?number_format($searchMaterials->sum('price'), 2):0}}--}}
-                                                            {{--                                                                        </span>--}}
-                                                            {{--                                                                        (PKR)--}}
-                                                            {{--                                                                    </strong>--}}
-                                                            {{--                                                                </div>--}}
+                                                            <div class="d-flex">
+                                                                <strong>
+                                                                    Total Expense:
+                                                                    <span class="text-info">
+                                                                        {{isset($searchMaterials)?number_format($searchMaterials->sum('price'), 2):0}}
+                                                                    </span>
+                                                                    (PKR)
+                                                                </strong>
+                                                            </div>
                                                         </th>
                                                         <th></th>
                                                         <th></th>

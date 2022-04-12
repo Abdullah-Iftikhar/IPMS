@@ -25,9 +25,12 @@ class CreateRentPropertiesTable extends Migration
                 ->onDelete('cascade');
             $table->string('name');
             $table->string('id_card');
+            $table->string('phone_number')->nullable();
             $table->double('advance_amount');
             $table->double('monthly_rent');
-            $table->double('commission');
+            $table->double('commission')->nullable();
+            $table->text('remarks')->nullable();
+
             $table->timestamps();
         });
     }

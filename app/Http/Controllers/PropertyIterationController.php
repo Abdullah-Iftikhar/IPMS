@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PropertyIteration;
 use App\Models\SoldProperty;
+use App\Models\SoldPropertyIteration;
 use Illuminate\Http\Request;
 
 class PropertyIterationController extends Controller
@@ -14,7 +15,7 @@ class PropertyIterationController extends Controller
             if (isset($_GET['name']) && $_GET['name'] != '') {
                 $query->where('name', 'like', '%' . $_GET['name'] . '%');
             }
-            })
+        })
             ->orderBy('created_at', 'desc')
             ->paginate(10);
         return view('admin.property.iteration.list', $returnArr);
@@ -30,7 +31,6 @@ class PropertyIterationController extends Controller
         $request->validate([
             'name' => 'required|unique:property_iterations',
         ]);
-
         $iteration = new PropertyIteration();
         $iteration->name = $request['name'];
         $iteration->save();
@@ -51,7 +51,7 @@ class PropertyIterationController extends Controller
         $iteration = PropertyIteration::find($id);
         if ($iteration) {
             $request->validate([
-                'name' => 'required|unique:property_iterations,name,'.$id .',id',
+                'name' => 'required|unique:property_iterations,name,' . $id . ',id',
             ]);
             $iteration->name = $request['name'];
             $iteration->save();
@@ -71,18 +71,64 @@ class PropertyIterationController extends Controller
 
     public function getPropertyIteration($id)
     {
-        $soldProperty = SoldProperty::find($id);
+        $soldProperty = SoldProperty::findOrFail($id);
         $iterations = PropertyIteration::get();
-        if ($soldProperty) {
-            return view('admin.property.sold.iteration', compact('soldProperty', 'iterations'));
 
+        $soldAmount = $soldProperty->amount;
+        $iterationAmount = 0;
+
+        if ($soldProperty) {
+            if (count($soldProperty->getSoldIteration)) {
+                $iterationAmount = $soldProperty->getSoldIteration->sum('amount');
+            }
+        }
+        $remainingAmount = $soldAmount - $iterationAmount;
+        if($remainingAmount <= 0) {
+            $soldProperty->status = 1;
+            $soldProperty->save();
+            return redirect()->back()->with('error', 'Your property is iteration completed.');
+        }
+
+
+        if ($soldProperty) {
+            return view('admin.property.sold.iteration', compact('soldProperty', 'iterations', 'remainingAmount'));
         }
         return redirect()->back()->with('error', 'property not found.');
-
     }
 
     public function postPropertyIteration(Request $request, $id)
     {
-        dd($request->all(), $id);
+        $soldProperty = SoldProperty::findOrFail($id);
+//        $soldAmount = 0;
+//        $iterationAmount = 0;
+//
+//        if ($soldProperty) {
+//            $iterationAmount = $soldProperty->amount;
+//            if (count($soldProperty->getSoldIteration)) {
+//                $iterationAmount = $soldProperty->getSoldIteration->sum('amount')+$request['amount'];
+//            }
+//        }
+//
+//        if($soldAmount < ) {
+//            $remainingAmount = $iterationAmount - $;
+//            return redirect()->route('admin.sold.property.detail', $id)->with('error', '');
+//        }
+
+        $request->validate([
+            'iteration' => 'required',
+            'start_date' => 'required',
+            'next_date' => 'nullable|after:start_date',
+            'amount' => 'required',
+        ]);
+
+        $iteration = new SoldPropertyIteration();
+        $iteration->sold_property_id = $soldProperty->id;
+        $iteration->type = $request['iteration'];
+        $iteration->start_date = $request['start_date'];
+        $iteration->next_date = $request['next_date'];
+        $iteration->amount = $request['amount'];
+        $iteration->description = $request['description'];
+        $iteration->save();
+        return redirect()->route('admin.sold.property.detail', $id)->with('success', 'Iteration added successfully.');
     }
 }

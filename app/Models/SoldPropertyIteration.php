@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class SoldPropertyIteration extends Model
 {
     use HasFactory;
+
+    public function getEntity() {
+        return $this->hasOne(PropertyIteration::class, 'id', 'type');
+    }
 }

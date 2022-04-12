@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Property;
 use App\Models\SoldProperty;
+use App\Models\SoldPropertyIteration;
 use Illuminate\Http\Request;
 
 class SellController extends Controller
@@ -85,7 +86,7 @@ class SellController extends Controller
 
     public function propertyDetail($id)
     {
-        $property = Property::find($id);
+        $property = Property::where('id', $id)->with('getSoldDetail.getSoldIteration')->first();
         if ($property) {
             return view('admin.property.sold.detail', compact('property'));
         }

@@ -20,4 +20,8 @@ class SoldProperty extends Model
     public function getUser() {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
+
+    public function getSoldIteration() {
+        return $this->hasMany(SoldPropertyIteration::class, 'sold_property_id', 'id');
+    }
 }
