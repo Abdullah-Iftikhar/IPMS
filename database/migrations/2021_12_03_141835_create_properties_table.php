@@ -20,15 +20,14 @@ class CreatePropertiesTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('society');
-            $table->string('plot_no')->nullable()->change();
-            $table->string('block')->nullable()->change();
-            $table->string('phase')->nullable()->change();
-            $table->string('plot_type')->nullable()->change();
-            $table->string('property_type')->nullable()->change();
-            $table->string('property_for')->nullable()->change();
-            $table->string('area')->nullable();
-            $table->integer('area_size')->nullable();
+            $table->string('plot_no');
+            $table->string('block');
+            $table->string('phase');
+            $table->string('plot_type');
+            $table->string('property_type');
+            $table->string('marla');
             $table->double('rate');
+            $table->string('property_for');
             $table->string('owner_name')->nullable();
             $table->string('owner_number')->nullable();
             $table->string('id_card')->nullable();
@@ -44,8 +43,7 @@ class CreatePropertiesTable extends Migration
             $table->index('phase');
             $table->index('plot_type');
             $table->index('property_type');
-            $table->index('area');
-            $table->index('area_size');
+            $table->index('marla');
             $table->index('rate');
             $table->index('property_for');
             $table->index('owner_name');
