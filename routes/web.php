@@ -80,6 +80,8 @@ Route::group(['middleware' => 'auth', 'after' => 'no-cache'], function () {
             Route::get('/list', 'App\Http\Controllers\RentController@rentedList')->name('admin.property.rented');
             Route::get('/active/{id}', 'App\Http\Controllers\RentController@moveToActive')->name('admin.property.rent.to.active');
             Route::get('/detail/{id}', 'App\Http\Controllers\RentController@propertyDetail')->name('admin.rented.property.detail');
+            Route::get('/iterations/{id}', 'App\Http\Controllers\RentController@rentIteration')->name('admin.rented.iterations');
+            Route::post('/post/iterations/{id}', 'App\Http\Controllers\RentController@postRentIteration')->name('admin.post.rented.iterations');
         });
 
         //Construction Properties

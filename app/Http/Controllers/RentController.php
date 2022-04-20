@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank;
+use App\Models\BankAccount;
 use App\Models\Property;
 use App\Models\RentProperty;
+use App\Models\RentPropertyIteration;
 use App\Models\SoldProperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RentController extends Controller
 {
@@ -87,6 +91,7 @@ class RentController extends Controller
     public function propertyDetail($id)
     {
         $property = Property::find($id);
+        $banks = Bank::get();
         if ($property) {
             return view('admin.property.rented.detail', compact('property'));
         }
@@ -102,5 +107,49 @@ class RentController extends Controller
             return redirect()->route('admin.property.list')->with('success','Product move from rent to active successfully.');
         }
         return redirect()->back()->with('error', 'property not found.');
+    }
+
+    public function rentIteration($id) {
+        $rentProperty = RentProperty::findOrFail($id);
+        $banks = BankAccount::where('status', 'active')->get();
+        return view('admin.property.rented.iteration', compact('banks', 'rentProperty'));
+    }
+
+    public function postRentIteration(Request $request, $id) {
+        $rentProperty = RentProperty::findOrFail($id);
+        $request->validate([
+            'receiving_date'=>'required',
+            'rent_amount'=>'required',
+            'description'=>'required',
+        ]);
+
+        $iteration = new RentPropertyIteration();
+        $iteration->rent_property_id = $rentProperty->id;
+        $iteration->bank_id = $request['bank'];
+        $iteration->date = $request['receiving_date'];
+        $iteration->amount = $request['rent_amount'];
+        $iteration->description = $request['description'];
+        $iteration->save();
+
+        if ($request['bank']) {
+            $bankAcc = BankAccount::findOrFail($request['bank']);
+            if ($bankAcc) {
+                $amount = $bankAcc->amount + $request['rent_amount'];
+                $newRec = new BankAccount();
+                $newRec->user_id = Auth::user()->id;
+                $newRec->bank_id = $bankAcc->bank_id;
+                $newRec->acc_title = $bankAcc->acc_title;
+                $newRec->acc_number = $bankAcc->acc_number;
+                $newRec->amount = $amount;
+                $newRec->transaction = $request['rent_amount'];
+                $newRec->property_id = $rentProperty->property_id;
+                $newRec->save();
+
+                $bankAcc->status = "inactive";
+                $bankAcc->save();
+            }
+        }
+
+        return redirect()->route('admin.rented.property.detail',$rentProperty->property_id)->with('success', 'Rent added successfully.');
     }
 }

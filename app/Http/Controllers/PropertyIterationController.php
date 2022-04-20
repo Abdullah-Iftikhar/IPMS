@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bank;
+use App\Models\BankAccount;
 use App\Models\PropertyIteration;
 use App\Models\SoldProperty;
 use App\Models\SoldPropertyIteration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PropertyIterationController extends Controller
 {
@@ -74,7 +76,7 @@ class PropertyIterationController extends Controller
     {
         $soldProperty = SoldProperty::findOrFail($id);
         $iterations = PropertyIteration::get();
-        $banks = Bank::get();
+        $banks = BankAccount::where('status', 'active')->get();
 
         $soldAmount = $soldProperty->amount;
         $iterationAmount = 0;
@@ -129,6 +131,28 @@ class PropertyIterationController extends Controller
         $iteration->bank_id = $request['bank'];
         $iteration->remaining = $remainingAmount;
         $iteration->save();
+
+
+        if ($request['bank']) {
+            $bankAcc = BankAccount::find($request['bank']);
+            if ($bankAcc) {
+                $amount = $bankAcc->amount + $request['amount'];
+                $newRec = new BankAccount();
+                $newRec->user_id = Auth::user()->id;
+                $newRec->bank_id = $bankAcc->bank_id;
+                $newRec->acc_title = $bankAcc->acc_title;
+                $newRec->acc_number = $bankAcc->acc_number;
+                $newRec->amount = $amount;
+                $newRec->transaction = $request['amount'];
+                $newRec->property_id = $soldProperty->property_id;
+                $newRec->save();
+
+                $bankAcc->status = "inactive";
+                $bankAcc->save();
+            }
+        }
+
+
         return redirect()->route('admin.sold.property.detail', $id)->with('success', 'Iteration added successfully.');
     }
 }

@@ -19,7 +19,6 @@ class CreateRentPropertyIterationsTable extends Migration
                 ->constrained('rent_properties')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('type');
             $table->integer('bank_id')->nullable();
             $table->string('date')->nullable();
             $table->double('amount')->nullable();

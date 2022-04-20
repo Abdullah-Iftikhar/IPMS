@@ -32,63 +32,32 @@
                                         <div class="card-block">
                                             <div class="card-body">
                                                 <form
-                                                    action="{{route('admin.sold.property.post.iteration', $soldProperty->id)}}"
+                                                    action="{{route('admin.post.rented.iterations', $rentProperty->id)}}"
                                                     method="post" enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="from-data">
                                                         <div class="row">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="col-lg-6 col-md-12 col-sm-12">
                                                                 <fieldset class="form-group">
-                                                                    <label>Iteration Type</label>
-                                                                    <select name="iteration" id="" class="form-control">
-                                                                        <option selected disabled>Choose One</option>
-                                                                        @foreach($iterations as $iteration)
-                                                                            <option
-                                                                                value="{{$iteration->id}}">{{$iteration->name}}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                    @if($errors->has('iteration'))
-                                                                        <div class="error"
-                                                                             style="color:red">{{$errors->first('iteration')}}</div>
-                                                                    @endif
-                                                                </fieldset>
-                                                            </div>
-
-                                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                                <fieldset class="form-group">
-                                                                    <label>Start Date</label>
-                                                                    <input type="date" name="start_date" required
+                                                                    <label>Receiving Date</label>
+                                                                    <input type="date" name="receiving_date" required
                                                                            class="form-control"
-                                                                           value="{{old('start_date')}}"
+                                                                           value="{{old('receiving_date')}}"
                                                                            id="basicInput">
-                                                                    @if($errors->has('start_date'))
+                                                                    @if($errors->has('receiving_date'))
                                                                         <div class="error"
-                                                                             style="color:red">{{$errors->first('start_date')}}</div>
+                                                                             style="color:red">{{$errors->first('receiving_date')}}</div>
                                                                     @endif
                                                                 </fieldset>
                                                             </div>
-
-                                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                                <fieldset class="form-group">
-                                                                    <label>Next Date</label>
-                                                                    <input type="date" name="next_date" required
-                                                                           class="form-control"
-                                                                           value="{{old('next_date')}}"
-                                                                           id="basicInput">
-                                                                    @if($errors->has('next_date'))
-                                                                        <div class="error"
-                                                                             style="color:red">{{$errors->first('next_date')}}</div>
-                                                                    @endif
-                                                                </fieldset>
-                                                            </div>
-                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="col-lg-6 col-md-12 col-sm-12">
                                                                 <fieldset class="form-group">
                                                                     <label>Bank</label>
                                                                     <select name="bank" id="" class="form-control">
                                                                         <option selected disabled>Cash</option>
                                                                         @foreach($banks as $bank)
                                                                             <option
-                                                                                value="{{$bank->id}}">{{$bank->name}}</option>
+                                                                                value="{{$bank->id}}">{{$bank->acc_title}} ({{$bank->acc_number}})</option>
                                                                         @endforeach
                                                                     </select>
                                                                     @if($errors->has('iteration'))
@@ -99,14 +68,14 @@
                                                             </div>
                                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                                 <fieldset class="form-group">
-                                                                    <label>Amount</label>
-                                                                    <input type="number"  title="remaining amount is {{isset($remainingAmount)?$remainingAmount:0}}" onkeyup="if(this.value > {{isset($remainingAmount)?$remainingAmount:""}}) this.value = null;"  name="amount" required
-                                                                           class="form-control"
-                                                                           value="{{old('amount')}}"
+                                                                    <label>Rent Amount</label>
+                                                                    <input type="number"  name="rent_amount" required
+                                                                           class="form-control" onkeyup="if(this.value === {{isset($rentProperty->monthly_rent)?$rentProperty->monthly_rent:""}}) this.value = null;"
+                                                                           value="{{old('rent_amount')}}"
                                                                            id="basicInput">
-                                                                    @if($errors->has('amount'))
+                                                                    @if($errors->has('rent_amount'))
                                                                         <div class="error"
-                                                                             style="color:red">{{$errors->first('amount')}}</div>
+                                                                             style="color:red">{{$errors->first('rent_amount')}}</div>
                                                                     @endif
                                                                 </fieldset>
                                                             </div>

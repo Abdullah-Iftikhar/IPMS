@@ -20,4 +20,8 @@ class RentProperty extends Model
     public function getUser() {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
+
+    public function getRentIteration() {
+        return $this->hasMany(RentPropertyIteration::class, 'rent_property_id', 'id');
+    }
 }
