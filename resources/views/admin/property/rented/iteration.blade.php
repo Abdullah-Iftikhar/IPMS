@@ -8,7 +8,7 @@
             <div class="breadcrumbs-top d-inline-block">
                 <div class="breadcrumb-wrapper mr-1">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Sold Property</a>
+                        <li class="breadcrumb-item"><a href="#">Rented Property</a>
                         </li>
                         <li class="breadcrumb-item">
                             <a href="#">Iteration</a>

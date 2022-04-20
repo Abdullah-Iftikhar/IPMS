@@ -20,8 +20,8 @@ class CreateRentPropertyIterationsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('type');
-            $table->string('start_date')->nullable();
-            $table->string('next_date')->nullable();
+            $table->integer('bank_id')->nullable();
+            $table->string('date')->nullable();
             $table->double('amount')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();

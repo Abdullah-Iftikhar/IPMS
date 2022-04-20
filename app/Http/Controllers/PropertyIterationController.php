@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank;
 use App\Models\PropertyIteration;
 use App\Models\SoldProperty;
 use App\Models\SoldPropertyIteration;
@@ -73,6 +74,7 @@ class PropertyIterationController extends Controller
     {
         $soldProperty = SoldProperty::findOrFail($id);
         $iterations = PropertyIteration::get();
+        $banks = Bank::get();
 
         $soldAmount = $soldProperty->amount;
         $iterationAmount = 0;
@@ -91,7 +93,7 @@ class PropertyIterationController extends Controller
 
 
         if ($soldProperty) {
-            return view('admin.property.sold.iteration', compact('soldProperty', 'iterations', 'remainingAmount'));
+            return view('admin.property.sold.iteration', compact('soldProperty', 'iterations', 'remainingAmount', 'banks'));
         }
         return redirect()->back()->with('error', 'property not found.');
     }
@@ -99,20 +101,16 @@ class PropertyIterationController extends Controller
     public function postPropertyIteration(Request $request, $id)
     {
         $soldProperty = SoldProperty::findOrFail($id);
-//        $soldAmount = 0;
-//        $iterationAmount = 0;
-//
-//        if ($soldProperty) {
-//            $iterationAmount = $soldProperty->amount;
-//            if (count($soldProperty->getSoldIteration)) {
-//                $iterationAmount = $soldProperty->getSoldIteration->sum('amount')+$request['amount'];
-//            }
-//        }
-//
-//        if($soldAmount < ) {
-//            $remainingAmount = $iterationAmount - $;
-//            return redirect()->route('admin.sold.property.detail', $id)->with('error', '');
-//        }
+
+        $soldAmount = $soldProperty->amount;
+        $iterationAmount = 0;
+
+        if ($soldProperty) {
+            if (count($soldProperty->getSoldIteration)) {
+                $iterationAmount = $soldProperty->getSoldIteration->sum('amount');
+            }
+        }
+        $remainingAmount = $soldAmount - ($iterationAmount+$request['amount']);
 
         $request->validate([
             'iteration' => 'required',
@@ -128,6 +126,8 @@ class PropertyIterationController extends Controller
         $iteration->next_date = $request['next_date'];
         $iteration->amount = $request['amount'];
         $iteration->description = $request['description'];
+        $iteration->bank_id = $request['bank'];
+        $iteration->remaining = $remainingAmount;
         $iteration->save();
         return redirect()->route('admin.sold.property.detail', $id)->with('success', 'Iteration added successfully.');
     }

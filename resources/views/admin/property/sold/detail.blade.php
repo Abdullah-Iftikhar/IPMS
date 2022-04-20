@@ -29,12 +29,22 @@
                     <div class="card-body card-dashboard">
                         <div class="row mb-3">
                             @if(isset($property->getSoldDetail))
-                                <div class="col-md-6 text-left">
+                                <div class="col-md-3 col-lg-3 xol-sm-12 text-left">
+                                    <strong>Amount:</strong>&nbsp; <span
+                                        class="text-info">{{number_format($property->getSoldDetail->amount)}}</span>
+                                </div>
+
+                                <div class="col-md-3 col-lg-3 xol-sm-12 text-left">
+                                    <strong>Remaining Amount:</strong>&nbsp; <span
+                                        class="text-info">{{isset($property->getSoldDetail->getSoldIteration)?number_format($property->getSoldDetail->getSoldIteration->last()->remaining):0}}</span>
+                                </div>
+
+                                <div class="col-md-3 col-lg-3 xol-sm-12 text-left">
                                     <strong>Profit Amount:</strong>&nbsp; <span
                                         class="text-info">{{number_format($property->getSoldDetail->amount - $property->rate)}}</span>
                                 </div>
                             @endif
-                            <div class="col-md-6 text-right">
+                            <div class="col-md-3 col-lg-3 xol-sm-12 text-right">
                                 <a href="{{route('admin.sold.property.iteration',$property->getSoldDetail->id)}}"
                                    class="btn btn-info">Add Iteration</a>
                                 <a href="{{route('admin.property.sold')}}" class="btn btn-dark">Back</a>
@@ -157,15 +167,125 @@
                                                        class="table table-striped table-bordered file-export">
                                                     <thead>
                                                     <tr>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th>
+                                                            <div class="row mb-3 justify-content-center">
+                                                                <div class="col-md-12 text-center">
+                                                                    <h4 class="text-info">Property Detail</h4>
+                                                                </div>
+                                                                <div class="col-md-12 col-lg-12 col-sm-12">
+                                                                    <strong>Society Name:</strong> <span
+                                                                        class="text-info">{{$property->society}}</span>
+                                                                </div>
+                                                                <div class="col-md-6 col-lg-6 col-sm-12">
+                                                                    <strong>Phase:</strong> <span
+                                                                        class="text-info">{{$property->phase}}</span>
+                                                                </div>
+
+                                                                <div class="col-md-6 col-lg-6 col-sm-12">
+                                                                    <strong>H/Plot #:</strong> <span
+                                                                        class="text-info"> {{$property->plot_no}}</span>
+                                                                </div>
+
+                                                                <div class="col-md-6 col-lg-6 col-sm-12">
+                                                                    <strong>Block:</strong> <span
+                                                                        class="text-info">{{$property->block}}</span>
+                                                                </div>
+
+                                                                <div class="col-md-6 col-lg-6 col-sm-12">
+                                                                    <strong>Area:</strong> <span
+                                                                        class="text-info">{{$property->area}}</span>
+                                                                </div>
+
+                                                                <div class="col-md-6 col-lg-6 col-sm-12">
+                                                                    <strong>Area Size:</strong> <span
+                                                                        class="text-info">{{$property->area_size}}</span>
+                                                                </div>
+
+                                                                <div class="col-md-12 col-lg-12 col-sm-12">
+                                                                    <strong>Plot Type:</strong> <span
+                                                                        class="text-info">{{$property->plot_type}}</span>
+                                                                </div>
+
+                                                                <div class="col-md-12 col-lg-12 col-sm-12">
+                                                                    <strong>Property Type:</strong> <span
+                                                                        class="text-info">{{$property->property_type}}</span>
+                                                                </div>
+
+                                                                <div class="col-md-12 col-lg-12 col-sm-12">
+                                                                    <strong>Property For:</strong> <span
+                                                                        class="text-info">{{$property->property_for}}</span>
+                                                                </div>
+                                                            </div>
+
+                                                            {{--                                                            @if(isset($property->owner_name) && isset($property->owner_number) && isset($property->id_card))--}}
+                                                            {{--                                                                <div class="row mb-3">--}}
+                                                            {{--                                                                    <div class="col-md-12 col-lg-12 col-sm-12 text-center mt-2">--}}
+                                                            {{--                                                                        <h4 class="text-info">External Owner Detail</h4>--}}
+                                                            {{--                                                                    </div>--}}
+
+                                                            {{--                                                                    <div class="col-md-4 col-lg-4 col-sm-12">--}}
+                                                            {{--                                                                        <strong>Owner Name</strong> <span class="text-info"> {{$property->owner_name}} </span>--}}
+                                                            {{--                                                                    </div>--}}
+
+                                                            {{--                                                                    <div class="col-md-4 col-lg-4 col-sm-12">--}}
+                                                            {{--                                                                        <strong>Owner Mobile Number:</strong> <span class="text-info">{{$property->owner_number}}</span>--}}
+                                                            {{--                                                                    </div>--}}
+
+                                                            {{--                                                                    <div class="col-md-4 col-lg-4 col-sm-12">--}}
+                                                            {{--                                                                        <strong>Owner CNIC:</strong> <span class="text-info">{{$property->id_card}}</span>--}}
+                                                            {{--                                                                    </div>--}}
+                                                            {{--                                                                </div>--}}
+                                                            {{--                                                            @endif--}}
+
+                                                        </th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th>
+                                                            @if(isset($property->getSoldDetail))
+                                                                <div class="row mb-3 justify-content-center">
+                                                                    <div
+                                                                        class="col-md-12 col-lg-12 col-sm-12 text-center mt-2">
+                                                                        <h4 class="text-info">Purchaser Detail</h4>
+                                                                    </div>
+
+                                                                    <div class="col-md-12 col-lg-12 col-sm-12">
+                                                                        <strong>Sold By:</strong>
+                                                                        &nbsp; {{isset($property->getSoldDetail->getUser)?$property->getSoldDetail->getUser->name:"User Deleted"}}
+                                                                    </div>
+
+                                                                    <div class="col-md-12 col-lg-12 col-sm-12">
+                                                                        <strong>Purchaser Name:</strong>
+                                                                        &nbsp; {{$property->getSoldDetail->name}}
+                                                                    </div>
+
+                                                                    <div class="col-md-12 col-lg-12 col-sm-12">
+                                                                        <strong>ID Card:</strong>
+                                                                        &nbsp; {{$property->getSoldDetail->id_card}}
+                                                                    </div>
+
+                                                                    <div class="col-md-12 col-lg-12 col-sm-12">
+                                                                        <strong>Sold Amount:</strong>
+                                                                        &nbsp; {{$property->getSoldDetail->amount}}
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                        </th>
+                                                        <th></th>
+                                                    </tr>
+
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
                                                         <th>Type</th>
                                                         <th>Start Date</th>
                                                         <th>Next Date</th>
                                                         <th>Amount</th>
+                                                        <th>Remaining</th>
                                                         <th>Description</th>
                                                         <th>Created Date</th>
                                                     </tr>
-                                                    </thead>
-                                                    <tbody>
                                                     @if(count($property->getSoldDetail->getSoldIteration))
                                                         @foreach($property->getSoldDetail->getSoldIteration as $iteration)
                                                             <tr>
@@ -173,6 +293,7 @@
                                                                 <td>{{isset($iteration->start_date)?$iteration->start_date:"-"}}</td>
                                                                 <td>{{isset($iteration->end_date)?$iteration->end_date:"-"}}</td>
                                                                 <td>{{isset($iteration->amount)?number_format($iteration->amount,2):"-"}}</td>
+                                                                <td>{{isset($iteration->remaining)?$iteration->remaining:"-"}}</td>
                                                                 <td>{{isset($iteration->description)?$iteration->description:"-"}}</td>
                                                                 <td>{{$iteration->created_at->format('d-M-Y')}}</td>
                                                             </tr>
@@ -186,9 +307,20 @@
                                                         <th>
                                                             <div class="d-flex">
                                                                 <strong>
-                                                                    Total Expense:
+                                                                    Total Amount:
                                                                     <span class="text-info">
-                                                                        {{isset($searchMaterials)?number_format($searchMaterials->sum('price'), 2):0}}
+                                                                        {{isset($property->getSoldDetail->amount)?number_format($property->getSoldDetail->amount):0}}
+                                                                    </span>
+                                                                    (PKR)
+                                                                </strong>
+                                                            </div>
+                                                        </th>
+                                                        <th>
+                                                            <div class="d-flex">
+                                                                <strong>
+                                                                    Remaining Amount:
+                                                                    <span class="text-info">
+                                                                        {{isset($property->getSoldDetail->getSoldIteration)?number_format($property->getSoldDetail->getSoldIteration->last()->remaining):0}}
                                                                     </span>
                                                                     (PKR)
                                                                 </strong>

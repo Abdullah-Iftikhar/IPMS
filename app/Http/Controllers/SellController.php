@@ -88,6 +88,7 @@ class SellController extends Controller
     {
         $property = Property::where('id', $id)->with('getSoldDetail.getSoldIteration')->first();
         if ($property) {
+
             return view('admin.property.sold.detail', compact('property'));
         }
         return redirect()->back()->with('error', 'property not found.');
