@@ -293,7 +293,7 @@
                                                                 <td>{{isset($iteration->start_date)?$iteration->start_date:"-"}}</td>
                                                                 <td>{{isset($iteration->next_date)?$iteration->next_date:"-"}}</td>
                                                                 <td>{{isset($iteration->amount)?number_format($iteration->amount,2):"-"}}</td>
-                                                                <td>{{isset($iteration->remaining)?$iteration->remaining:"-"}}</td>
+                                                                <td>{{isset($iteration->remaining)?number_format($iteration->remaining,2):"-"}}</td>
                                                                 <td>{{isset($iteration->description)?$iteration->description:"-"}}</td>
                                                                 <td>{{$iteration->created_at->format('d-M-Y')}}</td>
                                                             </tr>
