@@ -290,8 +290,8 @@
                                                         @foreach($property->getSoldDetail->getSoldIteration as $iteration)
                                                             <tr>
                                                                 <td>{{isset($iteration->getEntity)?$iteration->getEntity->name:"-"}}</td>
-                                                                <td>{{isset($iteration->start_date)?$iteration->start_date:"-"}}</td>
-                                                                <td>{{isset($iteration->next_date)?$iteration->next_date:"-"}}</td>
+                                                                <td>{{isset($iteration->start_date)?\Carbon\Carbon::parse($iteration->start_date)->format('d-m-Y'):"-"}}</td>
+                                                                <td>{{isset($iteration->next_date)?\Carbon\Carbon::parse($iteration->next_date)->format('d-m-Y'):"-"}}</td>
                                                                 <td>{{isset($iteration->amount)?number_format($iteration->amount,2):"-"}}</td>
                                                                 <td>{{isset($iteration->remaining)?number_format($iteration->remaining,2):"-"}}</td>
                                                                 <td>{{isset($iteration->description)?$iteration->description:"-"}}</td>

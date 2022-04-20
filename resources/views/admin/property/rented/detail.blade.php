@@ -271,7 +271,7 @@
                                                     @if(count($property->getRentDetail->getRentIteration))
                                                         @foreach($property->getRentDetail->getRentIteration as $iteration)
                                                             <tr>
-                                                                <td>{{isset($iteration->date)?$iteration->date:"-"}}</td>
+                                                                <td>{{isset($iteration->date)?\Carbon\Carbon::parse($iteration->date)->format('d-m-Y'):"-"}}</td>
                                                                 <td>{{isset($iteration->amount)?number_format($iteration->amount,2):"-"}}</td>
                                                                 <td>{{isset($iteration->description)?$iteration->description:"-"}}</td>
                                                                 <td>{{$iteration->created_at->format('d-m-Y')}}</td>
