@@ -36,7 +36,7 @@
 
                                 <div class="col-md-3 col-lg-3 xol-sm-12 text-left">
                                     <strong>Remaining Amount:</strong>&nbsp; <span
-                                        class="text-info">{{isset($property->getSoldDetail->getSoldIteration)?number_format($property->getSoldDetail->getSoldIteration->last()->remaining):0}}</span>
+                                        class="text-info">{{isset($property->getSoldDetail->getSoldIteration->last()->remaining)?number_format($property->getSoldDetail->getSoldIteration->last()->remaining):0}}</span>
                                 </div>
 
                                 <div class="col-md-3 col-lg-3 xol-sm-12 text-left">
@@ -320,7 +320,7 @@
                                                                 <strong>
                                                                     Remaining Amount:
                                                                     <span class="text-info">
-                                                                        {{isset($property->getSoldDetail->getSoldIteration)?number_format($property->getSoldDetail->getSoldIteration->last()->remaining):0}}
+                                                                        {{isset($property->getSoldDetail->getSoldIteration->last()->remaining)?number_format($property->getSoldDetail->getSoldIteration->last()->remaining):0}}
                                                                     </span>
                                                                     (PKR)
                                                                 </strong>
