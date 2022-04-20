@@ -270,6 +270,11 @@
                                                                     </div>
 
                                                                     <div class="col-md-12 col-lg-12 col-sm-12">
+                                                                        <strong>Phone:</strong>
+                                                                        &nbsp; {{$property->getSoldDetail->phone_number}}
+                                                                    </div>
+
+                                                                    <div class="col-md-12 col-lg-12 col-sm-12">
                                                                         <strong>Sold Amount:</strong>
                                                                         &nbsp; {{$property->getSoldDetail->amount}}
                                                                     </div>
