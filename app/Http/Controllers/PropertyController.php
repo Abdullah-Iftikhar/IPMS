@@ -313,7 +313,7 @@ class PropertyController extends Controller
                 'name' => 'required',
                 'id_card' => 'required',
                 'phone_number' => 'required',
-                'advance_amount' => 'required',
+                'security' => 'required',
                 'monthly_rent' => 'required',
                 'commission' => 'required',
             ]);
@@ -329,9 +329,10 @@ class PropertyController extends Controller
             $rentedProperty->name = $request['name'];
             $rentedProperty->id_card = $request['id_card'];
             $rentedProperty->phone_number = $request['phone_number'];
-            $rentedProperty->advance_amount = $request['advance_amount'];
+            $rentedProperty->advance_amount = $request['security'];
             $rentedProperty->monthly_rent = $request['monthly_rent'];
             $rentedProperty->commission = $request['commission'];
+            $rentedProperty->remarks = $request['remarks'];
             $rentedProperty->save();
 
             if ($request['images']) {

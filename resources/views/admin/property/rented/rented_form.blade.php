@@ -49,7 +49,7 @@
                                                         <div class="row">
                                                             <div class="col-lg-4 col-md-4 col-sm-12">
                                                                 <fieldset class="form-group">
-                                                                    <label>Name (Sold To)</label>
+                                                                    <label>Name (Rented To)</label>
                                                                     <input type="text" name="name" required
                                                                            class="form-control" value="{{old('name')}}"
                                                                            id="basicInput">
@@ -110,21 +110,21 @@
                                                                 </fieldset>
                                                             </div>
 
-                                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="col-lg-4 col-md-6 col-sm-12">
                                                                 <fieldset class="form-group">
-                                                                    <label>Advance Amount</label>
-                                                                    <input type="number" name="advance_amount" required
+                                                                    <label>Security</label>
+                                                                    <input type="number" name="security" required
                                                                            class="form-control"
-                                                                           value="{{old('advance_amount')}}"
+                                                                           value="{{old('security')}}"
                                                                            id="basicInput">
-                                                                    @if($errors->has('advance_amount'))
+                                                                    @if($errors->has('security'))
                                                                         <div class="error"
-                                                                             style="color:red">{{$errors->first('advance_amount')}}</div>
+                                                                             style="color:red">{{$errors->first('security')}}</div>
                                                                     @endif
                                                                 </fieldset>
                                                             </div>
 
-                                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="col-lg-4 col-md-6 col-sm-12">
                                                                 <fieldset class="form-group">
                                                                     <label>Monthly Rent</label>
                                                                     <input type="number" name="monthly_rent" required
@@ -138,9 +138,9 @@
                                                                 </fieldset>
                                                             </div>
 
-                                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="col-lg-4 col-md-6 col-sm-12">
                                                                 <fieldset class="form-group">
-                                                                    <label>Commission Commission</label>
+                                                                    <label>Commission   &nbsp;<span class="text-info">(<strong>Optional</strong>)</span></label>
                                                                     <input type="number" step="any"
                                                                            value="{{old('commission')}}"
                                                                            name="commission"
@@ -149,21 +149,6 @@
                                                                     @if($errors->has('commission'))
                                                                         <div class="error"
                                                                              style="color:red">{{$errors->first('commission')}}</div>
-                                                                    @endif
-                                                                </fieldset>
-                                                            </div>
-
-                                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                <fieldset class="form-group">
-                                                                    <label>Pictures - Id card, Agreement etc.
-                                                                        &nbsp;<span
-                                                                            class="text-info">(<strong>Optional</strong>)</span></label>
-                                                                    <input type="file" name="images[]"
-                                                                           class="form-control" multiple
-                                                                           id="basicInput">
-                                                                    @if($errors->has('images'))
-                                                                        <div class="error"
-                                                                             style="color:red">{{$errors->first('images')}}</div>
                                                                     @endif
                                                                 </fieldset>
                                                             </div>
@@ -183,11 +168,26 @@
                                                                     @endif
                                                                 </fieldset>
                                                             </div>
+
+                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                <fieldset class="form-group">
+                                                                    <label>Pictures - Id card, Agreement etc.
+                                                                        &nbsp;<span
+                                                                            class="text-info">(<strong>Optional</strong>)</span></label>
+                                                                    <input type="file" name="images[]"
+                                                                           class="form-control" multiple
+                                                                           id="basicInput">
+                                                                    @if($errors->has('images'))
+                                                                        <div class="error"
+                                                                             style="color:red">{{$errors->first('images')}}</div>
+                                                                    @endif
+                                                                </fieldset>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="row justify-content-center border-top-black">
                                                         <fieldset class="form-group center mt-2">
-                                                            <a href="{{route('admin.property.sold')}}"
+                                                            <a href="{{route('admin.property.rented')}}"
                                                                class="btn btn-primary">View All</a>
                                                             <button type="submit" class="btn btn-success">submit
                                                             </button>

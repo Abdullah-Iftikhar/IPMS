@@ -29,6 +29,7 @@
                     <div class="card-body card-dashboard">
                         <div class="row">
                             <div class="col-md-12 col-lg-12 col-sm-12 text-right">
+                                <a href="{{route('admin.property.rented')}}" class="btn btn-primary">Add Rent</a>
                                 <a href="{{route('admin.property.rented')}}" class="btn btn-dark">Back</a>
                             </div>
                             <div class="col-md-12 col-lg-12 col-sm-12 text-center mt-2">
