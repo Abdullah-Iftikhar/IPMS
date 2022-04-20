@@ -29,7 +29,8 @@
                     <div class="card-body card-dashboard">
                         <div class="row mb-3">
                             <div class="col-md-12 col-lg-12 col-sm-12 text-right">
-                                <a href="{{route('admin.rented.iterations', $property->getRentDetail->id)}}" class="btn btn-primary">Add Rent</a>
+                                <a href="{{route('admin.rented.iterations', $property->getRentDetail->id)}}"
+                                   class="btn btn-primary">Add Rent</a>
                                 <a href="{{route('admin.property.rented')}}" class="btn btn-dark">Back</a>
                             </div>
                             <div class="col-md-12 col-lg-12 col-sm-12 text-center mt-2">
@@ -98,7 +99,8 @@
                                 </div>
 
                                 <div class="col-md-4 col-lg-4 col-sm-12">
-                                    <strong>Rented By:</strong> &nbsp; {{isset($property->getRentDetail->getUser)?$property->getRentDetail->getUser->name:"User Deleted"}}
+                                    <strong>Rented By:</strong>
+                                    &nbsp; {{isset($property->getRentDetail->getUser)?$property->getRentDetail->getUser->name:"User Deleted"}}
                                 </div>
 
                                 <div class="col-md-4 col-lg-4 col-sm-12">
@@ -134,7 +136,8 @@
                                 </div>
                                 @foreach($property->getRentDetail->getImages as $image)
                                     <div class="col-md-6 col-lg-6 col-sm-12 mt-1">
-                                        <img class="w-100" src="{{asset('public/rent_property/'.$image->image)}}" alt="">
+                                        <img class="w-100" src="{{asset('public/rent_property/'.$image->image)}}"
+                                             alt="">
                                     </div>
                                 @endforeach
                             </div>
@@ -254,6 +257,7 @@
                                                                 </div>
                                                             @endif
                                                         </th>
+                                                        <th></th>
                                                     </tr>
 
                                                     </thead>
@@ -262,6 +266,7 @@
                                                         <th>Date</th>
                                                         <th>Amount</th>
                                                         <th>Description</th>
+                                                        <th>Created Date</th>
                                                     </tr>
                                                     @if(count($property->getRentDetail->getRentIteration))
                                                         @foreach($property->getRentDetail->getRentIteration as $iteration)
@@ -269,12 +274,14 @@
                                                                 <td>{{isset($iteration->date)?$iteration->date:"-"}}</td>
                                                                 <td>{{isset($iteration->amount)?number_format($iteration->amount,2):"-"}}</td>
                                                                 <td>{{isset($iteration->description)?$iteration->description:"-"}}</td>
+                                                                <td>{{$iteration->created_at->format('d-m-Y')}}</td>
                                                             </tr>
                                                         @endforeach
                                                     @endif
                                                     </tbody>
                                                     <tfoot>
                                                     <tr>
+                                                        <th></th>
                                                         <th>
                                                             <div class="d-flex">
                                                                 <strong>
