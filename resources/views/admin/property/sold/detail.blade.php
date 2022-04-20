@@ -109,6 +109,10 @@
                                 <div class="col-md-4 col-lg-4 col-sm-12">
                                     <strong>Owner CNIC:</strong> &nbsp; {{$property->id_card}}
                                 </div>
+
+                                <div class="col-md-4 col-lg-4 col-sm-12">
+                                    <strong>Phone: </strong> &nbsp; {{$property->phone_number}}
+                                </div>
                             </div>
                         @endif
 
