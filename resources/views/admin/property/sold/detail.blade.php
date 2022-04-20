@@ -109,10 +109,6 @@
                                 <div class="col-md-4 col-lg-4 col-sm-12">
                                     <strong>Owner CNIC:</strong> &nbsp; {{$property->id_card}}
                                 </div>
-
-                                <div class="col-md-4 col-lg-4 col-sm-12">
-                                    <strong>Phone: </strong> &nbsp; {{$property->phone_number}}
-                                </div>
                             </div>
                         @endif
 
@@ -133,6 +129,10 @@
 
                                 <div class="col-md-4 col-lg-4 col-sm-12">
                                     <strong>ID Card:</strong> &nbsp; {{$property->getSoldDetail->id_card}}
+                                </div>
+
+                                <div class="col-md-4 col-lg-4 col-sm-12">
+                                    <strong>Phone: </strong> &nbsp; {{$property->getSoldDetail->phone_number}}
                                 </div>
 
                                 <div class="col-md-4 col-lg-4 col-sm-12">
