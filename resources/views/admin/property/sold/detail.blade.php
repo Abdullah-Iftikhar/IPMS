@@ -302,7 +302,14 @@
                                                                 <td>{{isset($iteration->start_date)?\Carbon\Carbon::parse($iteration->start_date)->format('d-m-Y'):"-"}}</td>
                                                                 <td>{{isset($iteration->next_date)?\Carbon\Carbon::parse($iteration->next_date)->format('d-m-Y'):"-"}}</td>
                                                                 <td>{{isset($iteration->amount)?number_format($iteration->amount,2):"-"}}</td>
-                                                                <td>{{isset($iteration->remaining)?number_format($iteration->remaining,2):"-"}}</td>
+                                                                <td>
+                                                                    {{isset($iteration->remaining)?number_format($iteration->remaining,2):"-"}}
+
+                                                                    @if($iteration->remaining < 0)
+                                                                        <br>
+                                                                        <a href="{{route('admin.delete.sold.property.iteration', $iteration->id)}}">Delete</a>
+                                                                    @endif
+                                                                </td>
                                                                 <td>{{isset($iteration->description)?$iteration->description:"-"}}</td>
                                                                 <td>{{$iteration->created_at->format('d-M-Y')}}</td>
                                                             </tr>

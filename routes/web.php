@@ -61,6 +61,10 @@ Route::group(['middleware' => 'auth', 'after' => 'no-cache'], function () {
         Route::prefix('sold-properties')->group(function () {
             Route::get('/list', 'App\Http\Controllers\SellController@soldList')->name('admin.property.sold');
             Route::get('/detail/{id}', 'App\Http\Controllers\SellController@propertyDetail')->name('admin.sold.property.detail');
+
+            Route::get('/iteration/{id}', 'App\Http\Controllers\SellController@getPropertyIteration')->name('admin.sold.property.iteration');
+            Route::post('post/iteration/{id}', 'App\Http\Controllers\SellController@postPropertyIteration')->name('admin.sold.property.post.iteration');
+            Route::get('delete/iteration/{id}', 'App\Http\Controllers\SellController@deleteSoldProIteration')->name('admin.delete.sold.property.iteration');
         });
 
         Route::prefix('property-iteration')->group(function (){
@@ -70,9 +74,6 @@ Route::group(['middleware' => 'auth', 'after' => 'no-cache'], function () {
             Route::get('/edit/{id}', 'App\Http\Controllers\PropertyIterationController@edit')->name('admin.property.iteration.edit');
             Route::post('/update/{id}', 'App\Http\Controllers\PropertyIterationController@update')->name('admin.property.iteration.update');
             Route::delete('/destroy/{id}', 'App\Http\Controllers\PropertyIterationController@destroy')->name('admin.property.iteration.destroy');
-
-            Route::get('/iteration/{id}', 'App\Http\Controllers\PropertyIterationController@getPropertyIteration')->name('admin.sold.property.iteration');
-            Route::post('post/iteration/{id}', 'App\Http\Controllers\PropertyIterationController@postPropertyIteration')->name('admin.sold.property.post.iteration');
         });
 
         //Rented Properties
