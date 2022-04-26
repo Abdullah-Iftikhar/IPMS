@@ -22,6 +22,6 @@ class SoldProperty extends Model
     }
 
     public function getSoldIteration() {
-        return $this->hasMany(SoldPropertyIteration::class, 'sold_property_id', 'id');
+        return $this->hasMany(SoldPropertyIteration::class, 'sold_property_id', 'id')->orderBy('created_at', 'desc');
     }
 }
