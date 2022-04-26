@@ -27,7 +27,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="col-md-12">
-                                <strong>Remaining Amount: </strong><span class="text-info">{{$remainingAmount}}</span>
+                                <strong>Remaining Amount: </strong><span class="text-info">{{$remainingAmount}} (PKR)</span>
                             </div>
                         </div>
                         <div class="card-content collapse show">
