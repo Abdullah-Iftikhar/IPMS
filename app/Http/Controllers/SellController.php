@@ -121,6 +121,7 @@ class SellController extends Controller
     public function postPropertyIteration(Request $request, $id)
     {
         $soldProperty = SoldProperty::findOrFail($id);
+        dd($soldProperty);
 
         $soldAmount = $soldProperty->amount;
         $iterationAmount = 0;
