@@ -101,22 +101,14 @@ class SellController extends Controller
     public function getPropertyIteration($id)
     {
         $soldProperty = SoldProperty::findOrFail($id);
-        $iterations = PropertyIteration::get();
+        $iterations = SoldPropertyIteration::where('sold_property_id', $soldProperty->id)->orderBy('created_at', 'desc')->first();
         $banks = BankAccount::where('status', 'active')->get();
 
-        $soldAmount = $soldProperty->amount;
-        $iterationAmount = 0;
-
-        if ($soldProperty) {
-            if (count($soldProperty->getSoldIteration)) {
-                $iterationAmount = $soldProperty->getSoldIteration->sum('amount');
-            }
-        }
-        $remainingAmount = $soldAmount - $iterationAmount;
+        $remainingAmount = $iterations->remaining;
         if($remainingAmount <= 0) {
             $soldProperty->status = 1;
             $soldProperty->save();
-            return redirect()->back()->with('error', 'Your property is iteration completed.');
+            return redirect()->back()->with('error', 'Your property iteration are completed.');
         }
 
 
@@ -183,7 +175,7 @@ class SellController extends Controller
     }
 
     public function deleteSoldProIteration($id) {
-        $iterations = PropertyIteration::findOrFail($id);
+        $iterations = SoldPropertyIteration::findOrFail($id);
         $iterations->delete();
         return redirect()->back()->with('success', 'Iteration deleted successfully.');
     }
