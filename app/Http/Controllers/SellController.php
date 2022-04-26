@@ -121,7 +121,6 @@ class SellController extends Controller
     public function postPropertyIteration(Request $request, $id)
     {
         $soldProperty = SoldProperty::findOrFail($id);
-        dd($soldProperty);
 
         $soldAmount = $soldProperty->amount;
         $iterationAmount = 0;
@@ -172,7 +171,7 @@ class SellController extends Controller
         }
 
 
-        return redirect()->route('admin.sold.property.detail', $id)->with('success', 'Iteration added successfully.');
+        return redirect()->route('admin.sold.property.detail', $soldProperty->property_id)->with('success', 'Iteration added successfully.');
     }
 
     public function deleteSoldProIteration($id) {
