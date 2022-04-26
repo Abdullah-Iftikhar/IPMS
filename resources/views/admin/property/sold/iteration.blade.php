@@ -25,12 +25,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <strong>Remaining Amount: </strong><span>{{$remainingAmount}}</span>
-                            </div>
-                        </div>
                         <div class="card-content collapse show">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <strong>Remaining Amount: </strong><span>{{$remainingAmount}}</span>
+                                </div>
+                            </div>
                             <div class="card-body card-dashboard">
                                 <div class="row justify-content-center">
                                     <div class="col-xl-8 col-md-8 col-sm-12">
