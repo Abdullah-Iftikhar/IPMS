@@ -101,10 +101,10 @@ class SellController extends Controller
     public function getPropertyIteration($id)
     {
         $soldProperty = SoldProperty::findOrFail($id);
-        $iterations = SoldPropertyIteration::where('sold_property_id', $soldProperty->id)->orderBy('created_at', 'desc')->first();
+        $iterations = PropertyIteration::get();
+        $soldIteration = SoldPropertyIteration::where('sold_property_id', $soldProperty->id)->orderBy('created_at', 'desc')->first();
         $banks = BankAccount::where('status', 'active')->get();
-
-        $remainingAmount = $iterations->remaining;
+        $remainingAmount = $soldIteration->remaining;
         if($remainingAmount <= 0) {
             $soldProperty->status = 1;
             $soldProperty->save();
