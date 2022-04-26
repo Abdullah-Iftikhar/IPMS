@@ -104,7 +104,7 @@ class SellController extends Controller
         $iterations = PropertyIteration::get();
         $soldIteration = SoldPropertyIteration::where('sold_property_id', $soldProperty->id)->orderBy('created_at', 'desc')->first();
         $banks = BankAccount::where('status', 'active')->get();
-        $remainingAmount = $soldIteration->remaining;
+        $remainingAmount = isset($soldIteration->remaining)?$soldIteration->remaining:$soldProperty->amount;
         if($remainingAmount <= 0) {
             $soldProperty->status = 1;
             $soldProperty->save();
