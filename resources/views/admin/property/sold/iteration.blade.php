@@ -23,6 +23,11 @@
         <!-- Alert animation start -->
         <section id="configuration">
             <div class="row">
+                <div class="col-md-12">
+                    <strong>Remaining Amount: </strong><span>{{$remainingAmount}}</span>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-content collapse show">
